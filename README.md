@@ -1,10 +1,10 @@
 # Neuropipe
 
-A beginner-friendly command-line tool for quickly setting up modular machine learning pipelines. Answer a series of questions about your project in the command-line, and a custom template will be created. The questions are based on the Scikit-Learn cheatsheet for selecting a learning algorithm:
+A beginner-friendly command-line tool for quickly setting up modular machine learning pipelines. Answer a series of questions about your project in the terminal, and a custom template will be created. The questions are based on the Scikit-Learn cheatsheet for selecting the right learning algorithm:
 
 ![Scikit-Learn Cheatsheet](docs/cheatsheet.png)
 
-Neuropipe was developed specifically for Scikit-Learn projects.
+__Neuropipe was developed specifically for Scikit-Learn projects.__
 
 <!--__Notable projects using neuropipe:__
 * Poirot – plagiarism detection software
@@ -20,14 +20,14 @@ Install `neuropipe` with pip:
 $ pip3 install neuropipe
  ```
 
-Create an empty project directory:
+Then create an empty project directory:
 
 ```
 $ mkdir my_project/
 $ cd my_project/
 ```
 
-Run `neuropipe my_project` and go through the decision tree to create your custom environment:
+And run `neuropipe my_project` to go through the questionnaire and create your custom environment:
 
 ```
 $ neuropipe my_project
@@ -52,21 +52,30 @@ A new project has the following file structure:
 ```
 
 Where:
-* `pipeline.py`: defines the entire pipeline, from fetching raw data to model evaluation – you run this
+* `pipeline.py`: defines the entire pipeline, from fetching raw data to model evaluation
 * `engine/`: holds all of the modules used in your pipeline
-* `engine/data_bus.py`: 
-* `engine/preprocessing.py`:
-* `engine/model.py`:
+* `engine/data_bus.py`: defines the functions for fetching and loading raw data into the pipeline
+ * Easily generate random datasets, convert CSVs or dictionaries into dataframes, load toy datasets, or wrap your own functions for loading data
+ * Automatic caching for pre and post-processed datasets, so data doesn't have to be re-fetched (or re-scraped) on each run
+* `engine/preprocessing.py`: 
+* `engine/model.py`: defines objects for learning models selected by neuropipe
+ * 
 * `engine/analytics.py`:
-* `data/`:
-* `models/`:
-* `figures/`: 
+* `data/`: 
+* `models/`: holds serialized...
+* `figures/`: holds visualizations of the feature set and model evaluations (i.e. correlation and confusion matrices, histograms, etc.)
 
-Neuropipe adheres to the canonical model for a machine learning pipeline.
+Neuropipe adheres to the canonical layout for a machine learning pipeline.
 
-<!--## Pending Features
+## Contributing
+
+There's a lot of potential for this project. I'd like to turn this into a library of pipeline templates 
+I'd like to turn this into a robust tool for easily scaffolding Scikit-Learn pipelines. Right now, the command-line questionnaire is limited in that it only recommends models
+
 There's a lot of potential for this project. I'd like to turn this into a robust tool for easily scaffolding Scikit-Learn pipelines. Right now, the command-line questionnaire helps with generating custom `model.py` and `analytics.py` files, but in the future a user could provide more information about their dataset (i.e. if it's structured or unstructured, text, image, time series, etc.) and problem domain. That way, `preprocessing.py` could be populated with common preprocessing and data wrangling functions tailored to the user's task at hand. 
+
 I'd also like to add more options for exploratory data analysis, feature selection, model evaluation, and cloud deployment.
+
 * Easily generate random datasets, convert CSVs or dictionaries into dataframes, load toy datasets, or wrap your own functions for loading data
 * Automatic caching for pre and post-processed datasets, so data doesn't have to be re-fetched (or scraped) on each run
 * Use common data wrangling operations, such as breaking a list into n-sized sublists

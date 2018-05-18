@@ -4,7 +4,7 @@ A beginner-friendly command-line tool for quickly setting up modular machine lea
 
 ![Scikit-Learn Cheatsheet](docs/cheatsheet.png)
 
-Neuropipe was developed specifically for projects using Scikit-Learn.
+Neuropipe was developed specifically for Scikit-Learn projects.
 
 <!--__Notable projects using neuropipe:__
 * Poirot – plagiarism detection software

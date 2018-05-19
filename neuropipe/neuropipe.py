@@ -23,7 +23,7 @@ def print_error(error):
 
 def prompt_yes_no(top_line='', bottom_line=''):
     """
-    Asks user a Y/N question (stolen from @alichtman).
+    Asks user a Y/N question (written by @alichtman).
 
     @param top_line: question header/category
     @param bottom_line: the question
@@ -82,14 +82,11 @@ def decision_tree():
 
 def generate_project(project_name, install_dependencies=False):
     """
-        Generate a project by following these steps:
-            1. Iterate through the template directory
-            2. Replace template variables in path names
-            3. Read files
-            4. Replace template variables in file contents
-            5. Write files to project destination
+    Generates template files for a specific project (written by @jimfleming).
 
-    (stolen from @jimfleming)
+    @param project_name:
+    @param install_dependencies:
+    @return:
     """
 
     project_config = {"project_name": project_name}
@@ -138,7 +135,7 @@ def generate_project(project_name, install_dependencies=False):
             with open(dest_path, 'w') as f:
                 f.write(file_str)
 
-    sys.stdout.write(' '.join(["Project created:", project_dir]))
+    sys.stdout.write(' '.join(["Project created:", project_dir, '\n']))
 
     if install_dependencies:
         pip.main(["install", '-r', "requirements.txt"])
@@ -154,8 +151,7 @@ def main():
         sys.stdout.write("Sorry, neuropipe only supports supervised learning projects")
         sys.exit(0)
     else:
-        generate_project("test_project")
-        # TODO: Create project files
+        generate_project(sys.argv[1])
 
 
 if __name__ == "__main__":

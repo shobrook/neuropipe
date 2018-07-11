@@ -1,5 +1,7 @@
 # Neuropipe
 
+None of this is finished, ignore.
+
 A beginner-friendly command-line tool for quickly setting up modular machine learning pipelines. Answer a series of questions about your project in the terminal, and a custom template will be created. The questions are based on the Scikit-Learn cheatsheet for selecting the right learning algorithm:
 
 ![Scikit-Learn Cheatsheet](docs/cheatsheet.png)

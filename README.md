@@ -1,4 +1,6 @@
-<img width="30%" src="./logo.png" />
+<p align="center"><img width="30%" src="./logo.png" /></p>
+
+***
 
 `neuropipe` is an easy-to-use microframework for machine learning pipelines in Scikit-Learn. Simply answer a series of questions about your project in the command-line, and a custom template will be created, fit with preprocessing functions and models that are most likely to be relevant to your task.
 

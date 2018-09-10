@@ -1,6 +1,6 @@
 <p align="center"><img width="30%" src="./logo.png" /></p>
 
-***
+---
 
 `neuropipe` is an easy-to-use microframework for machine learning pipelines in Scikit-Learn. Simply answer a series of questions about your project in the command-line, and a custom template will be created, fit with preprocessing functions and models that are most likely to be relevant to your task.
 
@@ -10,11 +10,9 @@ The questions are based on the Scikit-Learn cheatsheet for selecting the right l
 
 ![Scikit-Learn Cheatsheet](docs/cheatsheet.png)
 
-<br />
+<!--**Notable projects using `neuropipe`:**
 
-**Notable projects using `neuropipe`:**
-
-- [BitVision (17 stars)](http://github.com/shobrook/BitVision) – Bitcoin trading interface in the command-line that uses machine learning to predict price movements
+- [BitVision (17 stars)](http://github.com/shobrook/BitVision) – Bitcoin trading interface in the command-line that uses machine learning to predict price movements-->
 
 ## Usage
 

@@ -71,7 +71,7 @@ Neuropipe adheres to the canonical layout for a machine learning pipeline.
 
 ## Contributing
 
-All of the pipeline templates are based on my own personal projects, and are therefore very limited. If you've built an easily generalizable pipeline that isn't featured here, or have an idea for one, I strongly encourage you to add it to the template library<!--, so that potentially thousands of developers could benefit from your design-->. Read the contributing guidelines for more information.
+All of the pipeline templates are based on my own personal projects, and are therefore very limited. If you've built an easily generalizable pipeline that isn't featured here, or have an idea for one, I strongly encourage you to add it to the template library<!--, so that potentially thousands of developers could benefit from your design-->. Read the contributing guidelines to learn how.
 
 **Pending features:**
 

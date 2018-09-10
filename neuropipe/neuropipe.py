@@ -1,4 +1,6 @@
-## Globals ##
+#########
+# GLOBALS
+#########
 
 
 import os
@@ -10,93 +12,86 @@ import inquirer
 from colorama import Fore, Style
 
 
-## Helpers ##
+#########
+# HELPERS
+#########
 
 
 def print_warn(warning):
-    sys.stdout.write(warning) # TODO: Stylize
+    print(warning)  # TODO: Stylize
 
 
 def print_error(error):
-    sys.stdout.write(error) # TODO: Stylize
+    print(error)  # TODO: Stylize
 
 
-def prompt_yes_no(top_line='', bottom_line=''):
+def prompt_yes_no(prompt):
     """
     Asks user a Y/N question (written by @alichtman).
 
-    @param top_line: question header/category
-    @param bottom_line: the question
+    @param prompt: Prompt message to display.
     @return: T/F depending on the user's answer
     """
 
-    if top_line is '': # Only bottom_line should be printed and stylized
-        questions = [inquirer.List(
-            "choice",
-            message=''.join([Fore.GREEN, Style.BRIGHT, bottom_line, Fore.YELLOW]),
-            choices=[" Yes", " No"]
-        )]
-    else: # Both top and bottom_line should be printed and stylized
-        sys.stdout.write(''.join([Fore.GREEN, Style.BRIGHT, ' ', top_line]))
-        questions = [inquirer.List(
-            "choice",
-            message=''.join([Fore.GREEN, bottom_line, Fore.YELLOW]),
-            choices=[" Yes", " No"]
-        )]
+    question = [inquirer.List(
+        "choice",
+        message=''.join([Fore.GREEN, Style.BRIGHT, prompt, Fore.YELLOW]),
+        choices=[" Yes", " No"]
+    )]
+    answer = inquirer.prompt(question)
 
-    answers = inquirer.prompt(questions)
-
-    return answers.get("choice").strip() == "Yes"
+    return answer.get("choice").strip() == "Yes"
 
 
 def decision_tree():
     """
-    Questionnaire about a user's project to help select the right learning algorithms.
+    Questionnaire about a user's project to help select the right learning
+    algorithms.
 
-    @return: list of model names or None if the user's project involves unsupervised learning
+    @return: list of model names or None if the user's project involves
+    unsupervised learning.
     """
 
-    # TODO: Add in the following questions:
-    #   - (For classification) Are you predicting a binary class or multiple classes?
-    #   -
-
-    if prompt_yes_no(bottom_line="Are you predicting a category?"): # Classification
-        if prompt_yes_no(bottom_line="Do you have labeled data?"):
-            if prompt_yes_no(bottom_line="Does your dataset have less than 100K samples?"):
-                return ["NaiveBayes", "KNeighbors", "SVC", "RandomForest"] # QUESTION: Include Gradient Boosting Machine?
+    if prompt_yes_no("Are you predicting a category?"):  # Classification
+        if prompt_yes_no("Do you have labeled data?"):
+            if prompt_yes_no("Does your dataset have less than 100K samples?"):
+                # QUESTION: Include Gradient Boosting Machine?
+                return ["NaiveBayes", "KNeighbors", "SVC", "RandomForest"]
             else:
                 return ["SGDClassifier", "KernelApproximation"]
         else:
             return None
-    elif prompt_yes_no(bottom_line="Are you predicting a quantity?"): # Regression
-        if prompt_yes_no(bottom_line="Does your dataset have less than 100K samples?"):
-            if prompt_yes_no(bottom_line="Should only a few features be important?"):
+    elif prompt_yes_no("Are you predicting a quantity?"):  # Regression
+        if prompt_yes_no("Does your dataset have less than 100K samples?"):
+            if prompt_yes_no("Should only a few features be important?"):
                 return ["Lasso", "ElasticNet"]
             else:
-                return ["RidgeRegression", "SVR"] # TODO: Add other ensemble regressors
+                # TODO: Add other ensemble regressors
+                return ["RidgeRegression", "SVR"]
         else:
             return ["SGDRegressor"]
     else:
         return None
 
 
-def generate_project(project_name, install_dependencies=False):
+def generate_project(project_name, models, install_dependencies=False):
     """
     Generates template files for a specific project (written by @jimfleming).
 
     @param project_name:
     @param install_dependencies:
-    @return:
     """
 
     project_config = {"project_name": project_name}
 
     # Copy template to current directory
-    template_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "template"))
+    template_dir = os.path.abspath(os.path.join(
+        os.path.dirname(__file__), "template"))
     project_dir = os.getcwd()
 
     if not os.path.exists(template_dir):
-        print_error(' '.join([template_dir, "containing template files does not exist"]))
+        print_error(
+            ' '.join([template_dir, "containing template files does not exist"]))
         exit(1)
 
     # Recurse files and directories, replacing their filename with the
@@ -104,7 +99,8 @@ def generate_project(project_name, install_dependencies=False):
     for root, dirs, files in os.walk(template_dir):
         rel_root = os.path.relpath(root, start=template_dir)
         for dirname in dirs:
-            dest_dir = os.path.normpath(os.path.join(project_dir, rel_root, dirname))
+            dest_dir = os.path.normpath(
+                os.path.join(project_dir, rel_root, dirname))
             dest_dir = pystache.render(dest_dir, project_config)
 
             if os.path.exists(dest_dir):
@@ -120,7 +116,8 @@ def generate_project(project_name, install_dependencies=False):
 
             src_path = os.path.join(root, filename)
 
-            dest_path = os.path.normpath(os.path.join(project_dir, rel_root, filename))
+            dest_path = os.path.normpath(
+                os.path.join(project_dir, rel_root, filename))
             dest_path = pystache.render(dest_path, project_config)
 
             if os.path.exists(dest_path):
@@ -135,7 +132,7 @@ def generate_project(project_name, install_dependencies=False):
             with open(dest_path, 'w') as f:
                 f.write(file_str)
 
-    sys.stdout.write(' '.join(["Project created:", project_dir, '\n']))
+    print(' '.join(["Project created:", project_dir, '\n']))
 
     if install_dependencies:
         pip.main(["install", '-r', "requirements.txt"])
@@ -147,8 +144,9 @@ def generate_project(project_name, install_dependencies=False):
 def main():
     models = decision_tree()
 
-    if models == None:
-        sys.stdout.write("Sorry, neuropipe only supports supervised learning projects")
+    if models:
+        print_error(
+            "Sorry, neuropipe only supports supervised learning projects")
         sys.exit(0)
     else:
         generate_project(sys.argv[1])

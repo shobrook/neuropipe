@@ -10,29 +10,23 @@ import numpy as np
 from sklearn.feature_extraction import DictVectorizer
 from sklearn import datasets
 
-# from transformers import Transformer
-
 
 #########
 # HELPERS
 #########
 
 
-def load_from_dict(data, to_dataframe=False):
-    # TODO: Test the numpy array loader
+def load_from_dict(data, orient="columns"):
+    return pd.DataFrame.from_dict(data, orient=orient)
 
-    if to_dataframe:
-        return pd.DataFrame.from_dict(data, orient="columns")
-
-    vec = DictVectorizer()
-    return vec.fit_transform(data).toarray()
+    # vec = DictVectorizer()
+    # return vec.fit_transform(data).toarray()
 
 
-def load_from_csv(csv_path, delimiter, to_dataframe=False):
-    if to_dataframe:
-        return pd.read_csv(csv_path, sep=delimiter)
+def load_from_csv(csv_path, delimiter):
+    return pd.read_csv(csv_path, sep=delimiter)
 
-    return np.genfromtxt(csv_path, delimiter=delimiter)
+    # return np.genfromtxt(csv_path, delimiter=delimiter)
 
 
 #######

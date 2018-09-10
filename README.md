@@ -6,7 +6,11 @@
 
 The questions are based on the Scikit-Learn cheatsheet for selecting the right learning algorithm:
 
+<br />
+
 ![Scikit-Learn Cheatsheet](docs/cheatsheet.png)
+
+<br />
 
 **Notable projects using `neuropipe`:**
 

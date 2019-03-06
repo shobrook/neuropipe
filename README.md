@@ -49,11 +49,12 @@ A new project has the following file structure:
 └── figures/
 ```
 
-It's designed to be modular and easily customizable.
+designed to be modular, blah blah blah
+(Not finished yet, do not read)
 
 Where:
 
-- `pipeline.py`: defines the entire pipeline, from fetching
+- `pipeline.py`: defines the entire pipeline, from fetching to ....
 
 - `pipeline.py`: defines the entire pipeline, from fetching raw data to model evaluation
 - `engine/`: holds all of the modules used in your pipeline
@@ -66,17 +67,14 @@ Where:
 - `engine/analytics.py`:
 - `data/`: cache of your pre and post-processed data
 - `models/`: holds serialized...
-- `figures/`: holds visualizations of the feature set and model evaluations (i.e. correlation and confusion matrices, histograms, etc.)
-
-Neuropipe adheres to the canonical layout for a machine learning pipeline.
+- `figures/`: holds visualizations (i.e. correlation heatmaps, confusion matrices, histograms, etc.)
 
 ## Contributing
 
-All of the pipeline templates are based on my own personal projects, and are therefore very limited. If you've built an easily generalizable pipeline that isn't featured here, or have an idea for one, I strongly encourage you to add it to the template library<!--, so that potentially thousands of developers could benefit from your design-->. Read the contributing guidelines to learn how.
+All of the pipeline templates are based on my own personal projects, and are therefore very limited. If you've built an easily generalizable pipeline that isn't featured here, or have an idea for one, I strongly encourage you to add it to the template library. Read the contributing guidelines to learn how.
 
 **Pending features:**
 
-- Support for unsupervised projects (clustering, dimensionality reduction, etc.)
 - Functionality for visualizing features, the training process, and results
 - Common data wrangling operations, such as breaking a list into n-sized sublists
 - Option to deploy the pipeline as a Flask app <!--incl. Dockerfile and retrain/predict endpoints-->
